@@ -143,11 +143,10 @@ public class DrawHandler extends Handler {
 
     private boolean mNonBlockModeEnable;
 
-    private int mAcitivtyFrame = 60;//屏幕帧率
+    public static  int mAcitivtyFrame = 60;//屏幕帧率
 
     public DrawHandler(Looper looper, IDanmakuViewController view, boolean danmakuVisibile) {
         super(looper);
-        mAcitivtyFrame=DanmakuView.mAcitivtyFrame;
         mIdleSleep = !DeviceUtils.isProblemBoxDevice();
         bindView(view);
         if (danmakuVisibile) {

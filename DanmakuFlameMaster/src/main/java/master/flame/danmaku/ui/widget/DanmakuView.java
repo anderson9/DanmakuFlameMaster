@@ -81,7 +81,6 @@ public class DanmakuView extends View implements IDanmakuView, IDanmakuViewContr
 
     private long mUiThreadId;
 
-    public static int mAcitivtyFrame = 60;//屏幕帧率
 
     public DanmakuView(Context context) {
         super(context);
