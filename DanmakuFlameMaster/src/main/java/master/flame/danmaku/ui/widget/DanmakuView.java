@@ -51,7 +51,7 @@ public class DanmakuView extends View implements IDanmakuView, IDanmakuViewContr
 
     private HandlerThread mHandlerThread;
 
-    protected volatile DrawHandler handler;
+    public volatile DrawHandler handler;
 
     private boolean isSurfaceCreated;
 
@@ -81,6 +81,8 @@ public class DanmakuView extends View implements IDanmakuView, IDanmakuViewContr
 
     private long mUiThreadId;
 
+    public static int mAcitivtyFrame = 60;//屏幕帧率
+
     public DanmakuView(Context context) {
         super(context);
         init();
@@ -93,6 +95,7 @@ public class DanmakuView extends View implements IDanmakuView, IDanmakuViewContr
         DrawHelper.useDrawColorToClearCanvas(true, false);
         mTouchHelper = DanmakuTouchHelper.instance(this);
     }
+
 
     public DanmakuView(Context context, AttributeSet attrs) {
         super(context, attrs);

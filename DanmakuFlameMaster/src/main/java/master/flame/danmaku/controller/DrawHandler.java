@@ -122,7 +122,7 @@ public class DrawHandler extends Handler {
 
     private long mCordonTime2 = 60;
 
-    private long mFrameUpdateRate = 16;
+    public long mFrameUpdateRate = 16;
 
     @SuppressWarnings("unused")
     private long mThresholdTime;
@@ -143,8 +143,11 @@ public class DrawHandler extends Handler {
 
     private boolean mNonBlockModeEnable;
 
+    private int mAcitivtyFrame = 60;//屏幕帧率
+
     public DrawHandler(Looper looper, IDanmakuViewController view, boolean danmakuVisibile) {
         super(looper);
+        mAcitivtyFrame=DanmakuView.mAcitivtyFrame;
         mIdleSleep = !DeviceUtils.isProblemBoxDevice();
         bindView(view);
         if (danmakuVisibile) {
@@ -553,9 +556,19 @@ public class DrawHandler extends Handler {
 
     private void initRenderingConfigs() {
         long averageFrameConsumingTime = 16;
+        if(mAcitivtyFrame==60){
+            averageFrameConsumingTime=16;
+        }
+        if(mAcitivtyFrame==90){
+            averageFrameConsumingTime=12;
+        }
+        if(mAcitivtyFrame==120){
+            averageFrameConsumingTime=8;
+        }
         mCordonTime = Math.max(33, (long) (averageFrameConsumingTime * 2.5f));
         mCordonTime2 = (long) (mCordonTime * 2.5f);
-        mFrameUpdateRate = Math.max(16, averageFrameConsumingTime / 15 * 15);
+
+        mFrameUpdateRate = Math.max(averageFrameConsumingTime, averageFrameConsumingTime / 15 * 15);
         mThresholdTime = mFrameUpdateRate + 3;
 //        Log.i("DrawHandler", "initRenderingConfigs test-fps:" + averageFrameConsumingTime + "ms,mCordonTime:"
 //                + mCordonTime + ",mFrameRefreshingRate:" + mFrameUpdateRate);
